@@ -1,0 +1,1 @@
+["A", "B"].forEach(l => console.log(l));
