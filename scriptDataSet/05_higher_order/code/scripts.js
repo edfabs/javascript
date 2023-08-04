@@ -1121,3 +1121,78 @@ if (typeof module != "undefined" && module.exports && (typeof window == "undefin
   module.exports = SCRIPTS;
 if (typeof global != "undefined" && !global.SCRIPTS)
   global.SCRIPTS = SCRIPTS;
+
+// let rtlScripts = SCRIPTS.filter(s => s.direction == 'rtl');
+// console.log(rtlScripts.map(s => s.name));
+
+function characterCount(script){
+  return script.ranges.reduce((count, [from, to]) => {
+    return count + (to - from);
+  }, 0);
+}
+
+console.log(SCRIPTS.reduce((a,b) => {
+  return characterCount(a) < characterCount(b) ? b : a;
+}));
+
+// let biggest = null;
+// for(let script of SCRIPTS){
+//   if(biggest = null || characterCount(biggest) < characterCount(script)){
+//     biggest = script;
+//   }
+// }
+
+// console.log(biggest);
+
+function average(array){
+  return array.reduce((a,b) => a+b) / array.length;
+}
+
+// console.log(Math.round(average(SCRIPTS.filter( s => s.living).map(s => s.year))));
+
+function characterScript(code){
+  for(let script of SCRIPTS){
+    if(script.ranges.some(([from, to]) => {
+      return code >= from && code <to; }
+      ))
+      {
+      return script;
+    }
+  }
+  return null;
+}
+
+console.log(characterScript(40960));
+
+console.log('######################################################');
+
+function countBy(items, groupName){
+  let counts = [];
+  for(let item of items){
+      let name = groupName(item);
+      let known = counts.findIndex(c=>c.name==name);
+      if(known == -1){
+          counts.push({name, count:1})
+      }else{
+          counts[known].count++;
+      }
+  }
+  return counts;
+}
+
+function textScript(text){
+  let script =  countBy(text,char =>{
+      let script = characterScript(char.codePointAt(0));      
+      return script ? script.name : "none";
+  }).filter(({name}) => name != 'none');
+
+  console.log(script);
+  let total = script.reduce((n,{count}) => n +count, 0);
+  if(total == 0) return "No script found";
+
+  return script.map(({name, count}) => {
+      return `${Math.round(count * 100 / total)}% ${name}`;
+  }).join(",");
+}
+
+console.log(textScript("ありがとうございますCześć你会说英语吗пожа́луйста"));
