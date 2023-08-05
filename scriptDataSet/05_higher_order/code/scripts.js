@@ -1131,9 +1131,9 @@ function characterCount(script){
   }, 0);
 }
 
-console.log(SCRIPTS.reduce((a,b) => {
-  return characterCount(a) < characterCount(b) ? b : a;
-}));
+// console.log(SCRIPTS.reduce((a,b) => {
+//   return characterCount(a) < characterCount(b) ? b : a;
+// }));
 
 // let biggest = null;
 // for(let script of SCRIPTS){
@@ -1151,18 +1151,26 @@ function average(array){
 // console.log(Math.round(average(SCRIPTS.filter( s => s.living).map(s => s.year))));
 
 function characterScript(code){
+  
   for(let script of SCRIPTS){
     if(script.ranges.some(([from, to]) => {
-      return code >= from && code <to; }
-      ))
-      {
-      return script;
-    }
+      return code >= from && code <to; }))
+    return script;
   }
   return null;
 }
 
-console.log(characterScript(40960));
+function directionName(code){
+  for(let script of SCRIPTS){
+    if(script.ranges.some(([from, to]) => {
+      return code >= from && code < to;
+    }))
+    return script.direction;
+  }
+
+}
+
+// console.log(characterScript(40960));
 
 console.log('######################################################');
 
@@ -1170,9 +1178,10 @@ function countBy(items, groupName){
   let counts = [];
   for(let item of items){
       let name = groupName(item);
+      let direction = directionName(item.codePointAt(0));
       let known = counts.findIndex(c=>c.name==name);
       if(known == -1){
-          counts.push({name, count:1})
+          counts.push({name, count:1, direction})
       }else{
           counts[known].count++;
       }
@@ -1182,11 +1191,12 @@ function countBy(items, groupName){
 
 function textScript(text){
   let script =  countBy(text,char =>{
-      let script = characterScript(char.codePointAt(0));      
+      let script = characterScript(char.codePointAt(0));  
+      
       return script ? script.name : "none";
   }).filter(({name}) => name != 'none');
 
-  console.log(script);
+  // console.log(script);
   let total = script.reduce((n,{count}) => n +count, 0);
   if(total == 0) return "No script found";
 
@@ -1195,4 +1205,18 @@ function textScript(text){
   }).join(",");
 }
 
-console.log(textScript("ありがとうございますCześć你会说英语吗пожа́луйста"));
+// console.log(textScript("ありがとうございますCześć你会说英语吗пожа́луйста"));
+
+console.log('######################################################');
+
+function writingDirection(text){
+  let script = countBy(text, char => {
+    let script = characterScript(char.codePointAt(0));
+    
+    return script ? script.name : "none";
+  }).filter(({name}) => name != 'none');
+
+console.log(script);
+}
+
+console.log(writingDirection("пожа́луйста"))
