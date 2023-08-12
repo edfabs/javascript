@@ -25,11 +25,6 @@ class Group{
         }
         return group;
     }
-
-    // interator(){
-    //     const inter = this.members[Symbol.iterator]();
-    //     return inter;
-    // }
     [Symbol.iterator](){
         const members = this.members;
         let index = 0;
