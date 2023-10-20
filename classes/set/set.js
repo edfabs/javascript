@@ -23,6 +23,13 @@ class Conjunto{
             return true;
         }else return false;
     }
+    desde(elemIterable){
+        for (let index = elemIterable[0]; index <= elemIterable[1]; index++) {
+            console.log(index);
+            this.add(index);
+        }
+        return this.elementos;
+    }
 }
 var elementos = new Conjunto();
 console.log(elementos.add(2));
@@ -31,3 +38,5 @@ console.log(elementos.add(3));
 console.log(elementos);
 console.log(elementos.has(4));
 console.log(elementos.delete(2));
+console.log(elementos.desde([10,20]));
+console.log(elementos.desde([10,20]));
