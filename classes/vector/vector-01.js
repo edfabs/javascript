@@ -16,6 +16,30 @@ class Vector{
     }
 }
 
+class iteradorVector{
+    constructor(vector){
+        this.x = 0;
+        this.vector = vector;
+    }
+    next(){
+        if( this.x == this.vector)return {done: true};
+
+        let value = {   x: this.x,
+                        value: this.vector
+                    };
+        this.x++;
+        return {value, done:false};
+    }
+}
+
+Vector.prototype[Symbol.iterator] = function(){
+    return new iteradorVector;
+};
+
 console.log(new Vector(2,3).mas(new Vector(3,4)));
 console.log(new Vector(2,3).menos(new Vector(3,4)));
 console.log(new Vector(2,3).longitud);
+let vector = new Vector(2,3).mas(new Vector(3, 4));
+for(let {x, value} of vector){
+    console.log(x, value);
+}
