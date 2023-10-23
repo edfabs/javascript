@@ -14,6 +14,10 @@ class Vector{
     get longitud(){
         return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2));
     }
+
+    obtener(){
+        return `valor ${this.x},${this.y}`;
+    }
 }
 
 class iteradorVector{
@@ -22,10 +26,10 @@ class iteradorVector{
         this.vector = vector;
     }
     next(){
-        if( this.x == this.vector)return {done: true};
+        if( this.x == 2)return {done: true};
 
         let value = {   x: this.x,
-                        value: this.vector
+                        value: `valor ${vector.x}, ${vector.y}`
                     };
         this.x++;
         return {value, done:false};
@@ -39,7 +43,7 @@ Vector.prototype[Symbol.iterator] = function(){
 console.log(new Vector(2,3).mas(new Vector(3,4)));
 console.log(new Vector(2,3).menos(new Vector(3,4)));
 console.log(new Vector(2,3).longitud);
-let vector = new Vector(2,3).mas(new Vector(3, 4));
+let vector = new Vector(2,3);
 for(let {x, value} of vector){
     console.log(x, value);
 }
