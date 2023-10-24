@@ -2,6 +2,7 @@ class Vector{
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.contenido = [];
     }
     mas(vectorMas){
         return new Vector(this.x + vectorMas.x, this.y + vectorMas.y);
