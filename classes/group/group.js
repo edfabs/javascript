@@ -63,5 +63,3 @@ console.log(newGroup);
 for(const val of members){
     console.log(val)
 }
-
-console.log(Object.getOwnPropertyNames(members));
