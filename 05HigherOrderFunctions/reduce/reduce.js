@@ -21,4 +21,4 @@ require("./load")("script.js");
 //     return pasaron;
 // }
 // console.log(filtrar(SCRIPTS, codigo => codigo.living));
-console.log(SCRIPTS.filter(codigo => codigo.living == true));
+// console.log(SCRIPTS.filter(codigo => codigo.living == true));
