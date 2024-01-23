@@ -49,7 +49,9 @@ Matriz.prototype[Symbol.iterator] = function(){
     return new IteradorMatriz(this);
 };
 
-let matriz = new Matriz(2, 2, (x, y) => `valor ${x}, ${y}`);
+let matriz = new Matriz(4, 4, (x, y) => `valor ${x}, ${y}`);
 for(let {x, y, value} of matriz){
     console.log(x, y, value);
 }
+
+console.log(matriz.contenido);
