@@ -15,3 +15,11 @@ function codigoCaracter(codigo_caracter){
 // console.log(codigoCaracter(200));
 let caballoZapato = "🐴👟";
 console.log(caballoZapato.length);
+console.log(caballoZapato[0]);
+console.log(caballoZapato.charCodeAt(0));
+console.log(caballoZapato.codePointAt(0));
+
+let dragonRosa = "🐉🌹";
+for (let caracter of dragonRosa) {
+  console.log(caracter);
+}
