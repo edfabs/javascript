@@ -1,9 +1,68 @@
-<p>one</p>
+<p style="border:3px solid red;">one</p>
 <p>two</p>
-<p>three</p>
+<p data-classified="secret">three</p>
+
+<blockquote id="quote">
+    No book can ever be finished. While working on it we learn 
+    just enough to find it immature the moment we turn away
+    from it.
+</blockquote>
+<p><span id="one"></span></p>
+<p><span id="two"></span></p>
 
 <script>
     let paragraphs = document.body.getElementsByTagName("p");
     document.body.insertBefore(paragraphs[2], paragraphs[0]);
     console.log(paragraphs[0])
+
+    function elt(type, ...children){
+        let node = document.createElement(type);
+        for (let child of children){
+            console.log(child)
+            if (typeof child != "string") node.appendChild(child);
+            else node.appendChild(document.createTextNode(child));
+        }
+        return node;
+    }
+    document.getElementById("quote").appendChild(
+        elt("footer", "-", 
+            elt("strong", "Karl Popper"),
+            ", preface of the second edition of",
+            elt("em", "The open society and ItsEnemies"),",  1950"));
+    let paras = document.body.getElementsByTagName("p");
+    console.log(paras);
+    for(let para of Array.from(paras)){
+        if(para.getAttribute("data-classified") == "secret"){
+            para.remove();
+        }
+    }
+
+    let pa = document.body.getElementsByTagName("p")[0];
+    console.log("clientHeight:", pa.clientHeight);
+    console.log("offsetHeight:", pa.offsetHeight);
+
+  function time(name, action) {
+    let start = Date.now(); // Current time in milliseconds
+    action();
+    console.log(name, "took", Date.now() - start, "ms");
+  }
+
+  time("naive", () => {
+    let target = document.getElementById("one");
+    console.log("target.offsetwidth: ",target.offsetWidth);
+    while (target.offsetWidth < 2000) {
+      target.appendChild(document.createTextNode("X"));
+    }
+  });
+  // → naive took 32 ms
+
+  time("clever", function() {
+    let target = document.getElementById("two");
+    target.appendChild(document.createTextNode("XXXXX"));
+    console.log("target.offsetwidth: ",target.offsetWidth);
+    let total = Math.ceil(2000 / (target.offsetWidth / 5));
+    target.firstChild.nodeValue = "X".repeat(total);
+  });
+  // → clever took 1 ms
+</script>
 </script>
