@@ -9,6 +9,7 @@
 </blockquote>
 <p><span id="one"></span></p>
 <p><span id="two"></span></p>
+<p><img src="https://ligapetrolera.s3.us-west-1.amazonaws.com/static/images/base/ogImage.jpg" alt="Liga Petrolera" style="position:relative"></p>
 
 <script>
     let paragraphs = document.body.getElementsByTagName("p");
@@ -64,5 +65,16 @@
     target.firstChild.nodeValue = "X".repeat(total);
   });
   // → clever took 1 ms
-</script>
+  // rotar imgen
+  let cat = document.querySelector("img");
+  let angle = Math.PI / 2;
+  function animate(time, lastime){
+    if(lastime != null){
+      angle += (time - lastime) * 0.001;
+    }
+    cat.style.top = (Math.sin(angle) * 20) + "px";
+    cat.style.left = (Math.cos(angle) * 200) + "px";
+    requestAnimationFrame(newTime => animate(newTime, time));
+  }
+  requestAnimationFrame(animate)
 </script>
