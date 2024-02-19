@@ -69,11 +69,14 @@
   let cat = document.querySelector("img");
   let angle = Math.PI / 2;
   function animate(time, lastime){
+    console.log('time: ', time);
+    console.log('lastTime: ' ,lastime)
     if(lastime != null){
       angle += (time - lastime) * 0.001;
     }
     cat.style.top = (Math.sin(angle) * 20) + "px";
     cat.style.left = (Math.cos(angle) * 200) + "px";
+    cat .style.transform = 'rotate('+ angle * 10 +'deg)';
     requestAnimationFrame(newTime => animate(newTime, time));
   }
   requestAnimationFrame(animate)
