@@ -25,18 +25,29 @@
     {name: "Popocatepetl", height: 5465, place: "Mexico"},
     {name: "Mont Blanc", height: 4808, place: "Italy/France"}
     ]
-
-    let table = document.getElementById("mountains");
-    table.appendChild(document.createElement('table'));
-    //titles
+    var body = document.getElementsByTagName("body")[0];
+    var table = document.createElement("table");
+    var tbody = document.createElement("tbody");
     var headers=[];
     for (let elemento of MOUNTAINS){
+        var row = document.createElement("tr");
         for(let key in elemento){
-            console.log(key);
-            if(!headers.includes(key))headers.push(key);
+            if(!headers.includes(key)){
+                headers.push(key)
+                var ths = document.createElement("th");
+                var texHeader = document.createTextNode(key);
+                ths.appendChild(texHeader);
+                row.appendChild(ths);
+            }
         }
+        for(let value in elemento){
+            var tds = document.createElement("td");
+            var textTd = document.createTextNode(elemento[value]);
+            tds.appendChild(textTd);
+            row.appendChild(tds);
+        }
+        tbody.appendChild(row);
     }
-    for(head in headers){
-        table.firstChild.appendChild(document.createElement("th").contains(head));
-    }
+    table.appendChild(tbody);
+    body.appendChild(table);
 </script>
