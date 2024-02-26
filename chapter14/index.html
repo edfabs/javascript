@@ -9,7 +9,8 @@
 </blockquote>
 <p><span id="one"></span></p>
 <p><span id="two"></span></p>
-<p><img src="https://ligapetrolera.s3.us-west-1.amazonaws.com/static/images/base/ogImage.jpg" alt="Liga Petrolera" style="position:relative"></p>
+<p><img id="uno" src="https://ligapetrolera.s3.us-west-1.amazonaws.com/static/images/base/ogImage.jpg" alt="Liga Petrolera" style="position:relative"></p>
+<p><img id="dos" src="https://ligapetrolera.s3.us-west-1.amazonaws.com/static/images/base/ogImage.jpg" alt="Liga Petrolera" style="position:relative"></p>
 
 <script>
     let paragraphs = document.body.getElementsByTagName("p");
@@ -66,7 +67,8 @@
   });
   // → clever took 1 ms
   // rotar imgen
-  let cat = document.querySelector("img");
+  let cat = document.getElementById("uno");
+  let dos = document.getElementById("dos");
   let angle = Math.PI / 2;
   
   function animate(time, lastime){
@@ -76,8 +78,10 @@
       angle += (time - lastime) * 0.001;
       console.log("angle: ",angle);
     }
+    dos.style.top = (Math.sin(angle) * 30) + "px";
     cat.style.top = (Math.sin(angle) * 20) + "px";
     cat.style.left = (Math.cos(angle) * 200) + "px";
+    cat.style.marginLeft = "500px";
     cat .style.transform = 'rotate('+ angle * 10 +'deg)';
     requestAnimationFrame(newTime => animate(newTime, time));
   }
