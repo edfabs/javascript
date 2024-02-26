@@ -1,0 +1,13 @@
+<button>Click me</button>
+<p>No handler here.</p>
+<script>
+    let button =  document.querySelector("button");
+    //button.addEventListener("click", ()=>{
+    //    console.log("Button clicked.");
+    //});
+    function once(){
+        console.log("Done.");
+        button.removeEventListener("click", once);
+    }
+    button.addEventListener("click", once);
+</script>
