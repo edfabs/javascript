@@ -1,0 +1,10 @@
+<button>A1</button>
+<button>A2</button>
+<button>A3</button>
+<script>
+    document.body.addEventListener("click", event => {
+        if(event.target.nodeName == "BUTTON"){
+            console.log("Clicked", event.target.textContent);
+        }
+    });
+</script>
