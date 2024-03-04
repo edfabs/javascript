@@ -18,7 +18,7 @@
         for(let i = 0; i <  event.touches.length; i++){
             console.log(event.touches);
             let {pageX, pageY, radiusX} = event.touches[i];
-            console.log(radiusX)
+            console.log("radius: "+radiusX)
             let dot = document.createElement("dot");
             dot.style.left = (pageX - 50) + "px";
             dot.style.top = (pageY - 50) + "px";
