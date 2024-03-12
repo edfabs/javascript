@@ -1,0 +1,17 @@
+<p>🎈</p>
+<script>
+    let balloon = document.querySelector("p");
+    let size = 10;
+    balloon.style.fontSize = size+"px";
+    window.addEventListener("keydown", event => {
+        if(event.key == "ArrowDown"){
+            console.log(size);
+            size -= 10; 
+        }
+        if(event.key == "ArrowUp"){
+            console.log(size);
+            size += 10; 
+        }
+        balloon.style.fontSize = size+"px";
+    });
+</script>
