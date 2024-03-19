@@ -13,7 +13,7 @@
 <div class="trail"></div>
 <script>
     let scheduled = null;
-    let trail = document.querySelectorAll(".trail");
+    let trail = document.getElementsByClassName("trail");
     window.addEventListener("mousemove", event => {
         if(!scheduled){
             setTimeout(() => {
