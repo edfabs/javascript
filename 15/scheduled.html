@@ -5,7 +5,7 @@
             setTimeout(() => {
                 document.body.textContent = `Mouse at ${scheduled.pageX}, ${scheduled.pageY}`;
                 scheduled = null;
-            }, 0);
+            }, 100);
         }
         scheduled = event;
     });
